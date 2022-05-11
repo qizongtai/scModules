@@ -18,7 +18,7 @@ geneset_score <- function(mtx.log2,genes,bin=100,center=TRUE,no_bins=30,verbose=
     bb<-dplyr::ntile(aa,no_bins) #named int
     print(table(bb))
     names(bb)<-names(aa)
-    fc<-lapply(genes,function(x){
+    fc<-parallel::mclapply(genes,function(x){
       a2<-bb[x] #get bin number; a2: named int
       b2<-sample(names(bb[bb==a2]),size = bin,replace = F) #sample 100 genes; b2: chr[1:100]
       a3<-mtx.log2[x,] #for signature gene, get the expression value of all cells; a3: named numeric
@@ -38,23 +38,38 @@ type_score<-function(mtx.log2,typemat,gv='Gene',tv='Celltype',size=2,conf_int=0,
   if (verbose) message("running 'type_score'... will return a list(type,typescorelist)")
   #Only genes existing in tested mtx.log2
   typemat<-typemat[typemat[,gv] %in% rownames(mtx.log2),]
-  #Filter types with few genes
+  #Filter cell types with few genes
   tl<- typemat %>% dplyr::group_by(typemat[,tv]) %>% dplyr::summarise_all(length)
+  # `typemat[, tv]`    Gene Program
+  # <chr>             <int>   <int>
+  # 1 EpiSen_A           46      46
+  # 2 EpiSen_B           63      63
+  # 3 G1S                86      86
+  # 4 G2M                79      79
+  # 5 Immune             37      37
   tl<-tl[tl$Gene>size,]
   tl2<-as.data.frame(tl[,1])
   c1<-as.character(tl2[,1])
   typemat<-typemat[typemat[,tv] %in% c1,]
   #Score cells
-  t1<-unique(typemat[,tv])
-  # #use mcapply
-  # typescorelist<-parallel::mclapply(t1,function(x){
-  #   typescore<-geneset_score(mtx.log2,typemat[typemat[,tv]==x,gv],bin=bin,center=center,no_bins = no_bins)
-  # })
-  typescorelist<-lapply(t1,function(x){
+  t1<-unique(typemat[,tv]) #unique cell types: "EpiSen_A" "EpiSen_B" "OxPhos" "Immune" "pEMT_LQ" "Stress" "pEMT"
+  #option1: use mclapply
+  typescorelist<-parallel::mclapply(t1,function(x){
     typescore<-geneset_score(mtx.log2,typemat[typemat[,tv]==x,gv],bin=bin,center=center,no_bins = no_bins)
   })
+  # List of 10
+  # $ : Named num [1:100] -0.138 -0.2 -0.685 0.282 -0.144 ...
+  # ..- attr(*, "names")= chr [1:100] "AAACCTGAGCAGACTG-1-OCSCC1-post-3" "AAACCTGCATACTACG-1-OCSCC1-post-3" 
+  # $ : Named num [1:100] -0.0786 0.037 -0.1851 -0.0557 -0.1798 ...
+  # ..- attr(*, "names")= chr [1:100] "AAACCTGAGCAGACTG-1-OCSCC1-post-3" "AAACCTGCATACTACG-1-OCSCC1-post-3" 
   typescores<-do.call(cbind,typescorelist)
   colnames(typescores)<-t1
+  #                                     EpiSen_A      EpiSen_B      OxPhos        Immune      pEMT_LQ       Stress         pEMT
+  # AAACCTGAGCAGACTG-1-OCSCC1-post-3 -0.13796066 -0.0785503091 -0.16322768 -0.0007544539 -0.462373240  0.785821734  0.374618397
+  # AAACCTGCATACTACG-1-OCSCC1-post-3 -0.20028954  0.0370149013  0.45271896 -1.2621032554  0.080715449  1.270509287  1.470107801
+  # AAACCTGGTCTGATCA-1-OCSCC1-post-3 -0.68496917 -0.1850738054 -0.30376915  0.9488453587 -0.664185762  0.410816362 -0.409109653
+  # AAACCTGGTGGCGAAT-1-OCSCC1-post-3  0.28207583 -0.0556764897 -0.45954217 -0.8667186604  0.146998490 -0.202995813 -0.382384352
+  # AAACCTGTCCACGTGG-1-OCSCC1-post-3 -0.14410518 -0.1797775145  0.29231518 -0.4140463928  0.177249945 -0.256873284 -0.357516895
   names(typescorelist)<-t1
   #Classify cells by type with the highest expression
   Type<-character(length=nrow(typescores))

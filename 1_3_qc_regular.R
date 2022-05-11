@@ -23,7 +23,7 @@
 #   sketch_meta(meta); sketch_mtx(mtx); return(list(mtx=mtx, meta=meta))
 # }
 
-filter_cell_bymeta <- function(mtx,meta,meta.col=NULL,max=NULL,min=NULL,character=NULL,verbose=TRUE){
+filter_cells_bymeta <- function(mtx,meta,meta.col=NULL,max=NULL,min=NULL,character=NULL,verbose=TRUE){
   if (verbose) message("running 'filter_cell_bymeta'... return a list(mtx, meta)")
   #check if cells match among mtx and meta
   n_cell_meta <- nrow(meta)
@@ -87,12 +87,42 @@ geneset_percent <- function(mtx.count,gene=NULL,pattern=NULL,verbose=TRUE){
 ###filter1 count matrix by cells (vetical)
 ###Minimal 1000 expressed genes (>0 counts) to filter cells
 ###Note: run before filter2_gene; all genes are required to calcuate umi count 
-filter1_cell <- function(mtx.count,countcutoff=0,mingene=1000,
-                         maxgene=NULL,mincount=NULL,maxcount=NULL,verbose=TRUE){
+# non-parallel version
+# filter1_cells <- function(mtx.count,countcutoff=0,mingene=1000,
+#                           maxgene=NULL,mincount=NULL,maxcount=NULL,verbose=TRUE){
+#   if (verbose) message("running 'filter1_cell'... return a cell-filtered mtx.count")
+#   if (verbose) {message("Before cell filter:"); sketch_mtx(mtx.count)}
+#   #default filter: mingene
+#   genespercell <- apply(mtx.count,2,function(x)sum(x>countcutoff))
+#   mtx.count <- mtx.count[,genespercell > mingene]
+#   #optional filter: maxgene, mincount, maxcount
+#   if(!is.null(maxgene)){
+#     mtx.count <- mtx.count[,genespercell < maxgene]}
+#   if(!is.null(mincount)){
+#     countpercell < colSums(mtx.count)
+#     mtx.count <- mtx.count[,countpercell > maxcount]}
+#   if(!is.null(maxcount)){ 
+#     countpercell < colSums(mtx.count)
+#     mtx.count <- mtx.count[,countpercell < maxcount]}
+#   if (verbose) {message("After cell filter:"); sketch_mtx(mtx.count)} 
+#   return(mtx.count)
+# }
+
+filter1_cells <- function(mtx.count,countcutoff=0,mingene=1000,
+                          maxgene=NULL,mincount=NULL,maxcount=NULL,verbose=TRUE,cells.cut=NULL){
   if (verbose) message("running 'filter1_cell'... return a cell-filtered mtx.count")
-  message("Before cell filter:"); sketch_mtx(mtx.count)
+  if (verbose) {message("Before cell filter:"); sketch_mtx(mtx.count)}
   #default filter: mingene
-  genespercell <- apply(mtx.count,2,function(x)sum(x>countcutoff))
+  if(is.null(cells.cut)){
+    genespercell <- apply(mtx.count,2,function(m) sum(m>countcutoff))
+  } else {
+    cut = dplyr::ntile(1:ncol(mtx.count), cells.cut) #1 1 1 2 2 2 3 3 3
+    cut.uniq =  unique(cut) #1 2 3 
+    lst = parallel::mclapply(cut.uniq, mc.cores=cells.cut, function(x){
+      apply(mtx.count[,cut==x],2,function(m) sum(m>countcutoff)) }
+    )
+    genespercell = unlist(lst, use.names = F)
+  }
   mtx.count <- mtx.count[,genespercell > mingene]
   #optional filter: maxgene, mincount, maxcount
   if(!is.null(maxgene)){
@@ -103,28 +133,45 @@ filter1_cell <- function(mtx.count,countcutoff=0,mingene=1000,
   if(!is.null(maxcount)){ 
     countpercell < colSums(mtx.count)
     mtx.count <- mtx.count[,countpercell < maxcount]}
-  message("After cell filter:"); sketch_mtx(mtx.count); return(mtx.count)
+  if (verbose) {message("After cell filter:"); sketch_mtx(mtx.count)} 
+  return(mtx.count)
 }
 
 #filter2 count matrix by genes (horizontal); 
 #Note: cpm needs to be calculated without filtering genes in the function; 
 #Note: cpm can not be calculated after runing this gene-filtering function because cpm by definition required a full gene list.
 #Note: this is why this function returns a gene-filtered cpm matrix; 
-filter2_gene <- function(mtx.count,countcutoff=5,countcell=20,minavlog2=4,verbose=TRUE, whitelist=NULL){
+filter2_genes <- function(mtx.count,countcutoff=5,countcells=20,minavlog2=4,verbose=TRUE,whitelist=NULL,genes.cut=NULL){
   if (verbose) message("running 'filter2_gene'... return a gene-filtered mtx.cpm")
-  #filter1: countcutoff and countcell
-  cellspergene <- apply(mtx.count,1,function(x)sum(x>=countcutoff))
-  countcell.threshold <- cellspergene >= countcell
-  #filter2: minavlog
+  #filter1: countcutoff and countcells
+  if(is.null(genes.cut)){
+    cellspergene = apply(mtx.count,1,function(m) sum(m>=countcutoff))
+  } else {
+    cut = dplyr::ntile(1:nrow(mtx.count), genes.cut) #1 1 1 2 2 2 3 3 3
+    cut.uniq =  unique(cut) #1 2 3
+    lst = parallel::mclapply(cut.uniq, mc.cores=genes.cut, function(x){
+      apply(mtx.count[cut==x,],1,function(m) sum(m>=countcutoff)) }
+    )
+    #cellspergene = do.call(c,lst)
+    cellspergene = unlist(lst, use.names = F)
+  }
+  countcells.threshold = cellspergene >= countcells
+  
+  #filter2: minavlog in cpm
   mtx.cpm <- cpm(mtx.count=mtx.count, verbose=T)
-  cpm.gene.av <- rowMeans(mtx.cpm) #apply(mtx.cpm,1,mean)
+  #Note: NaN can be introduced in cpm transformation if colsums = 0 (cells have 0 counts)
+  cpm.gene.av <- Matrix::rowMeans(mtx.cpm) #apply(mtx.cpm,1,mean)
   minavlog2.threshold <- log2(cpm.gene.av+1) >= minavlog2
+  
   #filter3: whitelist
   whitelist.logi <- rownames(mtx.cpm) %in% whitelist
+  
   #combine filter 1+2+3
-  message("Before gene filter:"); sketch_mtx(mtx.count)
-  mtx.cpm <- mtx.cpm[countcell.threshold|minavlog2.threshold|whitelist.logi,]
-  message("After gene filter:"); sketch_mtx(mtx.cpm); return(mtx.cpm)
+  mtx.cpm <- mtx.cpm[countcells.threshold|minavlog2.threshold|whitelist.logi,]
+  
+  if (verbose) {message("Before gene filter:"); sketch_mtx(mtx.count)}
+  if (verbose) {message("After gene filter:"); sketch_mtx(mtx.cpm)}
   is_gene_duplicated(mtx.cpm)
+  return(mtx.cpm)
 }
 

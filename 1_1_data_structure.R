@@ -43,16 +43,16 @@ add_metadata <- function(meta, addmeta, addname=colnames(as.data.frame(addmeta))
   colnames(addmeta) <- addname
   n_addmeta <- nrow(addmeta)
   n_meta <- nrow(meta)
-  logical_cells <- row.names(addmeta) %in% row.names(meta)
-  overlap <- row.names(addmeta)[logical_cells]
-  unfound <- row.names(addmeta)[!logical_cells]
+  logical.cells <- row.names(addmeta) %in% row.names(meta)
+  overlap <- row.names(addmeta)[logical.cells]
+  unfound <- row.names(addmeta)[!logical.cells]
   n_overlap <- length(overlap)
   n_unfound <- length(unfound)
   if (verbose) message("In the original metadata, the sum cells (barcodes): ", n_meta)
   if (verbose) message("In the added metadata, the sum cells (barcodes): ", n_addmeta)
   if (verbose) message("For the added metadata, the overlaped cell(s): ", n_overlap, "; the unfound cell(s): ", n_unfound)
   #merge meta with addmeta by overlapped row.names
-  if (all(logical_cells) && n_addmeta == n_meta) {
+  if (all(logical.cells) && n_addmeta == n_meta) {
     message("All cells in metadata are remained")
     merged <- merge(x=meta, y=addmeta, by="row.names")
     #move column $Row.names to row.names
@@ -104,12 +104,47 @@ sketch_meta <- function(meta) {
   message(paste(colnames(meta), collapse = "; "))
 }
 
-#validate the order of metadata and mtx
+#check the order of metadata and mtx
 check_mtx_meta <- function(mtx, meta, verbose=TRUE) {
   if (verbose) {message("running 'check_mtx_meta'... return a logical value")}
   if (verbose) {sketch_mtx(mtx); sketch_meta(meta)}
-  if (identical(colnames(mtx), rownames(meta))) {
-    message("Cell IDs are matched!"); return(TRUE)
+  if ( identical(colnames(mtx), rownames(meta)) ) {
+    message("Cell IDs are 1)matched and 2)in order in both mtx and meta"); return(TRUE)
+  } else if ( all(colnames(mtx) %in% rownames(meta)) ) {
+    message("Cell IDs are 1)matched but NOT 2)in order! To order: meta = meta[colnames(mtx),]"); return(FALSE)
+  } else {message("Cell IDs are NOT matched!"); return(FALSE)}
+}
+
+#check the order of mtx1 and mtx2
+check_mtx1_mtx2 <- function(mtx1, mtx2, verbose=TRUE) {
+  if (verbose) {message("running 'check_mtx1_mtx2'... return a logical value")}
+  if (verbose) {sketch_mtx(mtx1); sketch_mtx(mtx2)}
+  if ( identical(colnames(mtx1), colnames(mtx2)) ) {
+    message("Cell IDs are 1)matched and 2)in order in both mtx and meta"); return(TRUE)
+  } else if ( all(colnames(mtx1) %in% colnames(mtx2)) ) {
+    message("Cell IDs are 1)matched but NOT 2)in order! To order: mtx1 = mtx1[,colnames(mtx2)]"); return(FALSE)
+  } else {message("Cell IDs are NOT matched!"); return(FALSE)}
+}
+
+#check the order of mtx1 and mtx2
+checkgenes_mtx1_mtx2 <- function(mtx1, mtx2, verbose=TRUE) {
+  if (verbose) {message("running 'check_mtx1_mtx2'... return a logical value")}
+  if (verbose) {sketch_mtx(mtx1); sketch_mtx(mtx2)}
+  if ( identical(rownames(mtx1), rownames(mtx2)) ) {
+    message("Gene IDs are 1)matched and 2)in order in both mtx and meta"); return(TRUE)
+  } else if ( all(rownames(mtx1) %in% rownames(mtx2)) ) {
+    message("Gene IDs are 1)matched but NOT 2)in order! To order: mtx1 = mtx1[rownames(mtx2),]"); return(FALSE)
+  } else {message("Gene IDs are NOT matched!"); return(FALSE)}
+}
+
+#check the order of meta1 and meta2
+check_meta1_meta2 <- function(meta1, meta2, verbose=TRUE) {
+  if (verbose) {message("running 'check_meta1_meta2'... return a logical value")}
+  if (verbose) {sketch_meta(meta1); sketch_meta(meta2)}
+  if ( identical(rownames(meta1), rownames(meta2)) ) {
+    message("Cell IDs are 1)matched and 2)in order in both mtx and meta"); return(TRUE)
+  } else if ( all(rownames(meta1) %in% rownames(meta2)) ) {
+    message("Cell IDs are 2)matched but NOT 2)in order! To order: meta1 = meta1[rownames(meta2),]"); return(FALSE)
   } else {message("Cell IDs are NOT matched!"); return(FALSE)}
 }
 
@@ -131,26 +166,34 @@ check_mtx_meta <- function(mtx, meta, verbose=TRUE) {
 }
 
 #match the metadata and mtx
-match_mtx_meta <- function(mtx, meta, return="mtx", verbose=TRUE) {
+match_mtx_meta <- function(mtx, meta, return="mtx", force=FALSE, verbose=TRUE) {
   if (verbose) {message("running 'match_mtx_bymeta'... return a matched mtx or metadata (the same format as input)")}
   if (verbose) {message("In the mtx:"); sketch_mtx(mtx); message("In the metadata:"); sketch_meta(meta)}
+  #check if mtx and meta are already matched using check_mtx_meta
+  if (check_mtx_meta(mtx=mtx, meta=meta, verbose=FALSE)) {stop("###===The mtx and meta are matched already!===###")}
   #check the rownames(cells) of the addmeta with meta
   if (return=="mtx") {
-    logical_cells <- colnames(mtx) %in% rownames(meta)
-    overlap <- colnames(mtx)[logical_cells]
-    unfound <- colnames(mtx)[!logical_cells]
+    logical.cells <- colnames(mtx) %in% rownames(meta)
+    overlap <- colnames(mtx)[logical.cells]
+    unfound <- colnames(mtx)[!logical.cells]
     n_overlap <- length(overlap)
     n_unfound <- length(unfound)
     if (verbose) message("In the mtx: the overlaped cell(s): ", n_overlap, "; the unfound cell(s): ", n_unfound)
-    .pause(m=mtx, format=return, logical.cells=logical_cells)
+    if (force) {
+      mtx.match <- mtx[,logical.cells]
+      message("The final mtx:"); sketch_mtx(mtx.match); return(mtx.match)
+    } else {.pause(m=mtx, format=return, logical.cells=logical.cells) }
   } else if (return=="meta") {
-    logical_cells <- rownames(meta) %in% colnames(mtx)
-    overlap <- rownames(meta)[logical_cells]
-    unfound <- rownames(meta)[!logical_cells]
+    logical.cells <- rownames(meta) %in% colnames(mtx)
+    overlap <- rownames(meta)[logical.cells]
+    unfound <- rownames(meta)[!logical.cells]
     n_overlap <- length(overlap)
     n_unfound <- length(unfound)
     if (verbose) message("In the metadata: the overlaped cell(s): ", n_overlap, "; the unfound cell(s): ", n_unfound)
-    .pause(m=meta, format=return, logical.cells=logical_cells)
+    if (force) {
+      meta.match <- meta[logical.cells,]
+      message("The final metadata:"); sketch_meta(meta.match); return(meta.match)
+    } else { .pause(m=meta, format=return, logical.cells=logical.cells) }
   } else { stop("please enter a valid character for <return>: mtx or meta") }
 }
 
@@ -184,13 +227,15 @@ match_mtx_meta <- function(mtx, meta, return="mtx", verbose=TRUE) {
 # }
 
 #match mtx1 by mtx2
-match_mtx1_bymtx2 <- function(mtx1, mtx2, verbose=TRUE) {
+match_mtx1_bymtx2 <- function(mtx1, mtx2, force=FALSE, verbose=TRUE) {
   if (verbose) {message("running 'match_mtx1_mtx2'... return a matched mtx1 by mtx2 (the same format mtx)")}
   if (verbose) {message("In the mtx1:");sketch_mtx(mtx1); message("In the mtx2:");sketch_mtx(mtx2)}
+  #check if mtx1 and mtx2 are already matched using check_mtx1_mtx2
+  if (check_mtx1_mtx2(mtx1=mtx1, mtx2=mtx2, verbose=FALSE)) {stop("###===The mtx and meta are matched already!===###")}
   #check the rownames(cells) of the addmeta with meta
-  logical_cells <- colnames(mtx1) %in% colnames(mtx2)
-  overlap <- colnames(mtx1)[logical_cells]
-  unfound <- colnames(mtx1)[!logical_cells]
+  logical.cells <- colnames(mtx1) %in% colnames(mtx2)
+  overlap <- colnames(mtx1)[logical.cells]
+  unfound <- colnames(mtx1)[!logical.cells]
   n_overlap <- length(overlap)
   n_unfound <- length(unfound)
   if (verbose) message("The overlaped cell(s): ", n_overlap, "; the unfound cell(s): ", n_unfound)
@@ -198,23 +243,28 @@ match_mtx1_bymtx2 <- function(mtx1, mtx2, verbose=TRUE) {
     var <- readline(prompt = "proceed matching mtx1 by mtx2? (y/n): ")
     if (toupper(var)=='Y') {
       message("entered 'Y/y'... proceed matching ...")
-      mtx1.match <- mtx1[,logical_cells]
+      mtx1.match <- mtx1[,logical.cells]
       sketch_mtx(mtx1.match); return(mtx1.match)
     } else if (toupper(var)=='N') {
       stop("entered 'N/n'... stop matching.")
     } else { message("please enter valid letter 'y' or 'n'"); pause() }
   }
-  pause()
+  if(force) {
+    mtx1.match <- mtx1[,logical.cells]
+    sketch_mtx(mtx1.match); return(mtx1.match)
+  } else { pause() }
 }
 
 #match meta1 by meta2
-match_meta1_bymeta2 <- function(meta1, meta2, verbose=TRUE) {
+match_meta1_bymeta2 <- function(meta1, meta2, force=FALSE, verbose=TRUE) {
   if (verbose) {message("running 'match_meta1_meta2'... return a matched meta1 by meta2 (the same format as meta1)")}
   if (verbose) {sketch_meta(meta1); sketch_meta(meta2)}
+  #check if mtx1 and mtx2 are already matched using check_mtx1_mtx2
+  if (check_meta1_meta2(meta1=meta1, meta2=meta2, verbose=FALSE)) {stop("###===The mtx and meta are matched already!===###")}
   #check the rownames(cells) of the addmeta with meta
-  logical_cells <- colnames(meta1) %in% colnames(meta2)
-  overlap <- colnames(meta1)[logical_cells]
-  unfound <- colnames(meta1)[!logical_cells]
+  logical.cells <- colnames(meta1) %in% colnames(meta2)
+  overlap <- colnames(meta1)[logical.cells]
+  unfound <- colnames(meta1)[!logical.cells]
   n_overlap <- length(overlap)
   n_unfound <- length(unfound)
   if (verbose) message("The overlaped cell(s): ", n_overlap, "; the unfound cell(s): ", n_unfound)
@@ -222,12 +272,15 @@ match_meta1_bymeta2 <- function(meta1, meta2, verbose=TRUE) {
     var <- readline(prompt = "proceed matching meta1 by meta2? (y/n): ")
     if (toupper(var)=='Y') {
       message("entered 'Y/y'... proceed matching ...")
-      meta1.match <- meta1[logical_cells,]
+      meta1.match <- meta1[logical.cells,]
       sketch_meta(meta1.match); return(meta1.match)
     } else if (toupper(var)=='N') {
       stop("entered 'N/n'... stop matching.")
     } else { message("please enter valid letter 'y' or 'n'"); pause() }
   }
-  pause()
+  if(force) {
+    meta1.match <- meta1[logical.cells,]
+    sketch_meta(meta1.match); return(meta1.match)
+  } else { pause() }
 }
 

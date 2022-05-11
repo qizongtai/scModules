@@ -41,7 +41,7 @@ time_str = function(ymd=T, hms=T) {
 #NA == NA -> TRUE (return TRUE if both are NAs)
 `%!=%` <- function(v1, v2) { (v1 != v2 | (is.na(v1) & !is.na(v2)) | (is.na(v2) & !is.na(v1))) & !(is.na(v1) & is.na(v2)) }
 `%==%` <- function(v1, v2) { (v1 == v2 | (is.na(v1) & is.na(v2)) ) & !( (is.na(v1) & !is.na(v2)) | (is.na(v2) & !is.na(v1)) ) }
-#NA == NA -> FALSE (return FALSE if both are NAs. In this case, whenever seeing NA)
+#NA == NA -> FALSE (return FALSE if both are NAs. In all cases, FALSE whenever seeing NA)
 `%!=na%` <- function(v1, v2) { v1 != v2 | (is.na(v1) & !is.na(v2)) | (is.na(v2) & !is.na(v1)) | (is.na(v1) & is.na(v2)) }
 `%==na%` <- function(v1, v2) { (v1 == v2) & !( (is.na(v1) & !is.na(v2)) | (is.na(v2) & !is.na(v1)) | (is.na(v1) & is.na(v2)) ) }
 
@@ -57,6 +57,43 @@ is_gene_duplicated <- function(mtx, verbose=TRUE) {
   message(n.dup.rownames, " duplicated gene symbols")
   message(dup.rownames)
   if (n.dup.rownames==0) {return(FALSE)} else {return(TRUE)}
+}
+
+discrete16=c("#e5192c","#3a77b7","#3cac4c","#813c93",
+             "#f36c24","#37b8c3","#a54922","#6b7627",
+             "#28996b","#965b6a","#e9148f","#595b5e",
+             "#76c3ad","#80d08a","#d29099","#f2e010")
+#show_col(discrete16)
+
+#library(RColorBrewer)
+#qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
+#brewer.discrete74 = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+brewer.discrete74= c("#7FC97F", "#BEAED4", "#FDC086", "#FFFF99", "#386CB0", "#F0027F", 
+                     "#BF5B17", "#666666", "#1B9E77", "#D95F02", "#7570B3", "#E7298A", 
+                     "#66A61E", "#E6AB02", "#A6761D", "#666666", "#A6CEE3", "#1F78B4", 
+                     "#B2DF8A", "#33A02C", "#FB9A99", "#E31A1C", "#FDBF6F", "#FF7F00", 
+                     "#CAB2D6", "#6A3D9A", "#FFFF99", "#B15928", "#FBB4AE", "#B3CDE3", 
+                     "#CCEBC5", "#DECBE4", "#FED9A6", "#FFFFCC", "#E5D8BD", "#FDDAEC", 
+                     "#F2F2F2", "#B3E2CD", "#FDCDAC", "#CBD5E8", "#F4CAE4", "#E6F5C9", 
+                     "#FFF2AE", "#F1E2CC", "#CCCCCC", "#E41A1C", "#377EB8", "#4DAF4A", 
+                     "#984EA3", "#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999", 
+                     "#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3", "#A6D854", "#FFD92F", 
+                     "#E5C494", "#B3B3B3", "#8DD3C7", "#FFFFB3", "#BEBADA", "#FB8072", 
+                     "#80B1D3", "#FDB462", "#B3DE69", "#FCCDE5", "#D9D9D9", "#BC80BD", 
+                     "#CCEBC5", "#FFED6F")
+
+if(F){
+  mytheme <- theme(plot.title = element_text(size = 14,color="black",hjust = 0.5),
+                   axis.title = element_text(size = 14,color ="black"), 
+                   axis.text = element_text(size= 14,color = "black"),
+                   panel.grid.minor.y = element_blank(),
+                   panel.grid.minor.x = element_blank(),
+                   axis.text.x = element_text(angle = 45, hjust = 1),
+                   panel.grid=element_blank(),
+                   legend.position = "top",
+                   legend.text = element_text(size= 12),
+                   legend.title= element_text(size= 12)
+  )
 }
 
 ###====== https://rdrr.io/github/ ======###

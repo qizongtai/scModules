@@ -169,7 +169,7 @@ run_mean <- function(mtx,k=100,endrule='mean',align='center',verbose=TRUE) {
 #return the min and max cpm for each gene of the refCells
 #.refrange = function(cna, ...) # this version does calculations based on log2 format
 .refrange = function (cna, isLog = FALSE, verbose = TRUE, ...) {
-  #dots is refCell itself; it is a list of ref cells id
+  #dots are the elements of refCell; refCell is a list of ref cells id
   #str(refCell)
   #List of 2
   #$ oligodendrocytes: chr [1:219] "MGH102-P1-A06" "MGH102-P1-A08" "MGH102-P1-D11" "MGH102-P1-E09" ...
