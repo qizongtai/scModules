@@ -39,11 +39,9 @@ library(scModules)
 - `Module4: Immune (TCR/BCR) repertoire analysis`
 
 ### Module1
-#### Module1 functions
 ![1_scRNA_celltype_workflow](https://user-images.githubusercontent.com/33009124/177924123-b77d89d4-fc91-4673-8ca3-1823942e7d36.PNG)
 
 ### Module2
-#### Module2 functions
 ![2_scRNA pipeline infercna](https://user-images.githubusercontent.com/33009124/177924157-cda90bf3-4953-4c3f-9ab5-7ba03c6222c9.PNG)
 
 infercna aims to provide functions for inferring CNA values from scRNA-seq data and related queries.
