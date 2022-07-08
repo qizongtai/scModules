@@ -19,6 +19,8 @@ It provides advanced analyses that NOT available in the popular single-cell pack
     gliomas by single-cell RNA-seq (Venteicher, Tirosh et al., 2017,
     *Science*)](https://doi.org/10.1126/science.aai8478)
 
+
+### Installation
 Please use the following code to install and load the package:
 
 ```R
