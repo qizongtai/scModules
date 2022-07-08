@@ -40,7 +40,10 @@ library(scModules)
 
 ### Module1
 ![1_scRNA_celltype_functions_skeleton](https://user-images.githubusercontent.com/33009124/177924024-8cb8bbc1-307b-42d3-b30d-798936b04111.PNG)
+![1_scRNA_celltype_workflow](https://user-images.githubusercontent.com/33009124/177924123-b77d89d4-fc91-4673-8ca3-1823942e7d36.PNG)
 
+### Module2
+![2_scRNA pipeline infercna](https://user-images.githubusercontent.com/33009124/177924157-cda90bf3-4953-4c3f-9ab5-7ba03c6222c9.PNG)
 
 ---
 
