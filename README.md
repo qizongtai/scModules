@@ -63,5 +63,5 @@ infercna aims to provide functions for inferring CNA values from scRNA-seq data 
 ---
 
 ## Version History
-* June 25, 2022
+* July 08, 2022
   Version 0.1.0: Initial release; essential functions for streamlined scRNA-seq analysis and visualization
