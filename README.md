@@ -10,8 +10,10 @@
 
 scModules is an R package for advanced processing and visualization of single-cell RNA-seq and TCR-seq data. It provides advanced analyses that NOT available in the popular single-cell package Seurat and currently has four functional modules as below. The methodology behind modules has been tried and tested in several high-impact publications, including Cell and Science. scModules enhances our ability to extract accurate and meaningful information from single-cell data and discover interesting cancer biology
 
-
-
+- `Module1: Cell type annotation (Marker genes based)`
+- `Module2: Malignant cell identification by copy number aberration`
+- `Module3: Metaprogram (cell state) identification`
+- `Module4: Immune (TCR/BCR) repertoire analysis`
 
 Please use the following code to install and load the package:
 
