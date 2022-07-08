@@ -1,6 +1,6 @@
 # scModules
 
-<img align="right" width="108" height="125" src="Scillus.png">
+<img align="right" width="108" height="125" src="![sc](https://user-images.githubusercontent.com/33009124/177930005-1df9b9fc-ac54-428a-bf4a-7f289f4350c9.PNG)">
 
 [![Build Status](https://travis-ci.com/xmc811/Scillus.svg?branch=master)](https://travis-ci.com/xmc811/Scillus)
 [![Build status](https://ci.appveyor.com/api/projects/status/dkq1xn6574kqgs0s/branch/master?svg=true)](https://ci.appveyor.com/project/xmc811/scillus/branch/master)
@@ -17,6 +17,7 @@
   - [Decoupling genetics, lineages, and microenvironment in IDH-mutant
     gliomas by single-cell RNA-seq (Venteicher, Tirosh et al., 2017,
     *Science*)](https://doi.org/10.1126/science.aai8478)
+
 
 
 ## Installation
