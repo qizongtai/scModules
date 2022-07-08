@@ -60,6 +60,13 @@ infercna aims to provide functions for inferring CNA values from scRNA-seq data 
   - `useGenome()` to change the default genome configured with infercna
   - `addGenome()` to configure infercna with a new genome specified by
     the user
+    
+### Module3
+**to be continued**
+
+### Module4
+**to be continued**
+
 ---
 
 ## Version History
