@@ -20,7 +20,7 @@ It provides advanced analyses that NOT available in the popular single-cell pack
     *Science*)](https://doi.org/10.1126/science.aai8478)
 
 
-### Installation
+## Installation
 Please use the following code to install and load the package:
 
 ```R
@@ -32,7 +32,7 @@ devtools::install_github("qizongtai/scModules", ref = "development")
 library(scModules)
 ```
 
-### Modules Summary
+## Modules Summary
 - `Module1: Cell type annotation (Marker genes based)`
 - `Module2: Malignant cell identification by copy number aberration`
 - `Module3: Metaprogram (cell state) identification`
@@ -71,8 +71,6 @@ infercna aims to provide functions for inferring CNA values from scRNA-seq data 
 
 ---
 
-### Version History
-
+## Version History
 * June 25, 2022
-
   Version 0.1.0: Initial release; essential functions for streamlined scRNA-seq analysis and visualization
