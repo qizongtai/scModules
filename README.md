@@ -8,7 +8,9 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/dkq1xn6574kqgs0s/branch/master?svg=true)](https://ci.appveyor.com/project/xmc811/scillus/branch/master)
 
 
-Scillus is a Seurat and ggplot2 wrapper for enhanced processing and visualization of scRNA-seq data. For detailed usage, please visit the Scillus documentation website: [scillus.netlify.com](http://scillus.netlify.com) [![Netlify Status](https://api.netlify.com/api/v1/badges/eadbcb9a-16d1-4a9a-9e50-c0e8d4104ddc/deploy-status)](https://app.netlify.com/sites/scillus/deploys)
+scModules is an R package for advanced processing and visualization of single-cell RNA-seq and TCR-seq data. It provides advanced analyses that NOT available in the popular single-cell package Seurat and currently has four functional modules as below. The methodology behind modules has been tried and tested in several high-impact publications, including Cell and Science. scModules enhances our ability to extract accurate and meaningful information from single-cell data and discover interesting cancer biology
+
+
 
 
 Please use the following code to install and load the package:
