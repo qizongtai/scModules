@@ -7,6 +7,12 @@
 [![Build Status](https://travis-ci.com/xmc811/Scillus.svg?branch=master)](https://travis-ci.com/xmc811/Scillus)
 [![Build status](https://ci.appveyor.com/api/projects/status/dkq1xn6574kqgs0s/branch/master?svg=true)](https://ci.appveyor.com/project/xmc811/scillus/branch/master)
 
+#[![CRAN Version](https://www.r-pkg.org/badges/version/iCellR)](https://cran.r-project.org/package=iCellR)
+#[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/iCellR)](https://cran.r-project.org/package=iCellR)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/iCellR)](https://cran.r-project.org/package=iCellR)
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+
+
 
 scModules is an R package for advanced processing and visualization of single-cell RNA-seq and TCR-seq data. It provides advanced analyses that NOT available in the popular single-cell package Seurat and currently has four functional modules as below. The methodology behind modules has been tried and tested in several high-impact publications, including Cell and Science. scModules enhances our ability to extract accurate and meaningful information from single-cell data and discover interesting cancer biology
 
