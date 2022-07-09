@@ -35,7 +35,7 @@ library(scModules)
 ## Modules Summary
 - `Module1: Cell type annotation (Marker genes based)`
 - `Module2: Malignant cell identification by copy number aberration`
-- `Module3: Metaprogram (cell state) identification`
+- `Module3: Metaprogram (cell state) identification by NMF`
 - `Module4: Immune (TCR/BCR) repertoire analysis`
 
 ### Module1
