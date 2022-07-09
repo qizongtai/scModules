@@ -62,9 +62,11 @@ infercna aims to provide functions for inferring CNA values from scRNA-seq data 
     the user
     
 ### Module3
+Functions are ready and need to be intergared into the R package.
 **to be continued**
 
 ### Module4
+Functions are ready and need to be intergared into the R package.
 **to be continued**
 
 ---
