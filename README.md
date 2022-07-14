@@ -12,7 +12,7 @@
 of single-cell RNA-seq and TCR-seq data. It integrates multiple genomic
 information (e.g., copy number aberration (CNA)) and statistical
 algorithms (e.g., non-negative matrix factorization (NMF)) to provide
-semi-automated end to end analyses that are NOT available in the popular
+semi-automated end-to-end analyses that are NOT available in the popular
 single-cell package **Seurat**. Currently, four modules are developed.
 The methodologies have been tested in several high-impact publications
 including Cell and Science. scModules enhances our ability to extract
