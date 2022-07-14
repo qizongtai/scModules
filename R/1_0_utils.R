@@ -1,7 +1,14 @@
-#remove functions
-#rm(list=lsf.str())
-
-#creat dirtories if not exist
+#' Create directories if not exist
+#'
+#' @param dir a character vector of path names;
+#' @param remove.dir a logical value. If FALSE, only the path not exist be created.
+#'
+#' @return a path
+#' @export
+#' @concept utils
+#'
+#' @examples
+#' create_dirs("tmp_dir")
 create_dirs <- function(dir, remove.dir=FALSE) {
   if (dir.exists(dir)) {
       message ("The directory ", dir, " already exists!")
@@ -29,7 +36,22 @@ create_dirs <- function(dir, remove.dir=FALSE) {
   }
 }
 
-#time ouput as a string character 
+#' A format time output as a string character 
+#' 
+#' if only ymd set TRUE, year-month-day
+#' if only hms set TRUE, hour minute second
+#' if all TRUE, year_month_day_hour minute second
+#'
+#' @param ymd a logical value
+#' @param hms a logical value
+#'
+#' @return
+#' a format time
+#' @export
+#' @concept utils
+#'
+#' @examples
+#' time_str()
 time_str = function(ymd=T, hms=T) {
   #stopifnot(ymd || hms) #output empty string instead of stop
   if (ymd==F && hms==F) return ("")
@@ -113,8 +135,11 @@ has_dim <- function(x) {!is.null(dim(x))}
 
 #' @title <dim> for many matrices
 #' @description Returns the result of dim for every matrix in a list
+#'
 #' @param mats a list of matrices (or a single matrix)
+#'
 #' @return dim for each matrix provided.
+#' @concept utils
 #' @rdname dims
 #' @export 
 dims <- function(mats) {
@@ -130,6 +155,7 @@ dims <- function(mats) {
 #' @description Returns the result of ncol for every matrix in a list
 #' @param mats a list of matrices (or a single matrix)
 #' @return ncol for each matrix provided.
+#' @concept utils
 #' @rdname ncols
 #' @export 
 ncols <- function(mats) {
@@ -146,6 +172,7 @@ ncols <- function(mats) {
 #' @description Returns the result of nrow for every matrix in a list
 #' @param mats a list of matrices (or a single matrix)
 #' @return nrow for each matrix provided.
+#' @concept utils
 #' @rdname nrows
 #' @export 
 nrows <- function(mats) {
@@ -157,7 +184,13 @@ nrows <- function(mats) {
   sapply(mats, nrow, simplify = T)
 }
 
+#' split matrix
+#' 
+#' @param m a matrix
+#' @param by a col names
+#'
 #' @export
+#' @concept utils
 split_matrix = function(m, by) {
   stopifnot(has_dim(m))
   stopifnot(is.character(by))
@@ -165,26 +198,31 @@ split_matrix = function(m, by) {
   list(x = m[, by, drop = F], y = m[, !colnames(m) %in% by, drop = F])
 }
 
+#' @concept utils
 #' @export
 have_equal_nrows = function(m1, m2) {
   nrow(m1) == nrow(m2)
 }
 
+#' @concept utils
 #' @export
 have_equal_rownames = function(m1, m2) {
   all(rownames(m1) == rownames(m2))
 }
 
+#' @concept utils
 #' @export
 is_square = function(m) {
   nrow(m) == ncol(m)
 }
 
+#' @concept utils
 #' @export
 have_equal_dims = function(m1, m2) {
   identical(dim(m1), dim(m2))
 }
 
+#' @concept utils
 #' @export
 is_cor = function(m) {
   rg = range(m)
@@ -195,6 +233,7 @@ is_cor = function(m) {
   FALSE
 }
 
+#' @concept utils
 #' @export
 is_symm = function(m) {
   (is_square(m)) && (sum(m == t(m)) == nrow(m)^2)
