@@ -122,4 +122,5 @@ be continued**
 ## Version History
 
 -   July 08, 2022 Version 0.1.0: Initial release; essential functions
-    for streamlined scRNA-seq analysis and visualization
+    for streamlined scRNA-seq analysis and visualization.
+-
