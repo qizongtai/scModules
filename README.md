@@ -80,9 +80,7 @@ infercna aims to provide functions for inferring CNA values from scRNA-seq data 
 -    `knn_cluster()` computes the k.param nearest neighbors for a given feature-cell matrix or cell-feature matrix (set transposed =T in this case). It also computes the weight for edges using 1-correlation ecoefficiency. The graph based clustering methods can be chosen from Louvain, walk_trap and infomap by <method> parameters. 
 -    `snn_cluster()` computes the k.param nearest neighbors for a given feature-cell matrix or cell-feature matrix (set transposed =T in this case). It also computes shared nearest neighbors (SNN) and construct a SNN graph by calculating the neighborhood overlap (Jaccard index) between every cell and its k.param nearest neighbors. 
 -     `wide_gcluster()` transforms the data.frame from long format to wide one.
--     'de_genes()' finds markers differentially expressed in each cluster or identity group by comparing it to all of the others. For each comparison, a new UMI matrix was created containing only the relevant cells. It was then log2(CPM/10+1)-transformed, filtered to only keep highly expressed genes, and mean-centered. P-values were corrected using the Benjamini-Hochberg method.
-
-#### visualization
+-     `de_genes()` finds markers differentially expressed in each cluster or identity group by comparing it to all of the others. For each comparison, a new UMI matrix was created containing only the relevant cells. It was then log2(CPM/10+1)-transformed, filtered to only keep highly expressed genes, and mean-centered. P-values were corrected using the Benjamini-Hochberg method.
 
 
 ### Module2
