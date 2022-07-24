@@ -34,19 +34,13 @@ discover new cancer biology.
 You can install the development version of scModules from
 [GitHub](https://github.com/) with:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("qizongtai/scModules")
-```
-
-## Example
-
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
 if (!require(devtools)) {
   install.packages("devtools")
 }
+# install.packages("devtools")
 
 devtools::install_github("qizongtai/scModules", ref = "development")
 library(scModules)
