@@ -101,7 +101,7 @@ Module2 provides functions for inferring CNA values and identify epithelial mali
 -   `useGenome()` changes the default genome configured with infercna
 -   `addGenome()` configures infercna with a new genome specified by the user
 
-#### visualization functions (refer to R script for a full list)
+#### Visualization functions (refer to R script for a full list)
 -   `cnaPlot()` to plot a heatmap of CNA values
 -   `cnaScatterPlot()` to visualise malignant and non-malignant cell subsets
 
