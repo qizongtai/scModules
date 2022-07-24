@@ -55,8 +55,8 @@ library(scModules)
 
 ### Module1
 
-![1_scRNA_celltype_workflow](https://user-images.githubusercontent.com/33009124/177924123-b77d89d4-fc91-4673-8ca3-1823942e7d36.PNG)
 Module1 provides functions to prosess scRNA-seq data from raw cellranger output and assign cell types for each cell.
+![1_scRNA_celltype_workflow](https://user-images.githubusercontent.com/33009124/177924123-b77d89d4-fc91-4673-8ca3-1823942e7d36.PNG)
 
 #### Compuatation functions (refer to R script for a full list)
 -   `read_mtx()` imports the Sparse Matrix outputs from Cellranger and convert it into a regular Matrix. 
@@ -85,10 +85,8 @@ Module1 provides functions to prosess scRNA-seq data from raw cellranger output 
 
 ### Module2
 
-![2_scRNA pipeline
-infercna](https://user-images.githubusercontent.com/33009124/177924157-cda90bf3-4953-4c3f-9ab5-7ba03c6222c9.PNG)
-
 Module2 provides functions for inferring CNA values and identify epithelial malignant cells. 
+![2_scRNA pipeline infercna](https://user-images.githubusercontent.com/33009124/177924157-cda90bf3-4953-4c3f-9ab5-7ba03c6222c9.PNG)
 
 #### compuatation
 -   `infercna()` infers copy-number alterations from single-cell RNA-seq data
@@ -109,11 +107,13 @@ Module2 provides functions for inferring CNA values and identify epithelial mali
 -   `cnaScatterPlot()` to visualise malignant and non-malignant cell subsets
 
 ### Module3
+Module3 provides functions for NMF decomposition and identification of metaprograms across multiple samples or patients.
 ![3_scRNA pipeline metaprogram smallsize](https://user-images.githubusercontent.com/33009124/180667067-7097aff1-3782-4642-90a0-8439492c6572.PNG)
 
 Functions are ready and need to be intergared into the R package. **to be continued**
 
 ### Module4
+Module4 provides functions for TCR estimates (clonality + TCR richness + Gini index) and enrichment analysis.
 ![4_scRNA pipeline TCR smallsize](https://user-images.githubusercontent.com/33009124/180667079-f04ac2ca-90fd-43a0-803a-1b58e7f0c1de.PNG)
 
 Functions are ready and need to be intergared into the R package. **to be continued**
