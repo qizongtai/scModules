@@ -112,9 +112,9 @@ alterations from single-cell RNA-seq data
 
 
 ### Module4
+![4_scRNA pipeline TCR](https://user-images.githubusercontent.com/33009124/180666982-f8624731-26d8-46bc-86d8-5adf0d116150.PNG)
 
-Functions are ready and need to be intergared into the R package. **to
-be continued**
+Functions are ready and need to be intergared into the R package. **to be continued**
 
 ------------------------------------------------------------------------
 
