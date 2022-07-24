@@ -58,7 +58,7 @@ library(scModules)
 ![1_scRNA_celltype_workflow](https://user-images.githubusercontent.com/33009124/177924123-b77d89d4-fc91-4673-8ca3-1823942e7d36.PNG)
 infercna aims to provide functions for inferring CNA values from scRNA-seq data and related queries. 
 
-#### compuatation
+#### Compuatation functions (essensital ones)
 -   `read_mtx()` imports the Sparse Matrix outputs from Cellranger and convert it into a regular Matrix. 
 -   `create_metadata()` creates a matrix to store the meta data (features) for the cells. 
 -   `add_metadata()` adds new metadata to the existing metadata. It also checks the cell IDs when merging; If cell IDs doesn’t match between original and added metadata, users will have an option to proceed or stop the `add_metadata()` function.
