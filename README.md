@@ -87,7 +87,7 @@ Module1 provides functions to prosess scRNA-seq data from raw cellranger output 
 Module2 provides functions for inferring CNA values and identify epithelial malignant cells. 
 ![2_scRNA pipeline infercna](https://user-images.githubusercontent.com/33009124/177924157-cda90bf3-4953-4c3f-9ab5-7ba03c6222c9.PNG)
 
-#### compuatation
+#### Compuatation functions (refer to R script for a full list)
 -   `infercna()` infers copy-number alterations from single-cell RNA-seq data
 -   `refCorrect()` converts relative CNA values to absolute values + computed in `infercna()` if reference cells are provided
 -   `cnaCor()` calcualte a parameter to identify cells with high CNAs + computed in `cnaScatterPlot()`
@@ -101,7 +101,7 @@ Module2 provides functions for inferring CNA values and identify epithelial mali
 -   `useGenome()` changes the default genome configured with infercna
 -   `addGenome()` configures infercna with a new genome specified by the user
 
-#### visualization
+#### visualization functions (refer to R script for a full list)
 -   `cnaPlot()` to plot a heatmap of CNA values
 -   `cnaScatterPlot()` to visualise malignant and non-malignant cell subsets
 
