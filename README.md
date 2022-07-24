@@ -109,6 +109,7 @@ alterations from single-cell RNA-seq data
 
 ### Module3
 ![3_scRNA pipeline metaprogram](https://user-images.githubusercontent.com/33009124/180665518-828756b2-df70-4bee-a587-70987cc2cf6c.PNG)
+![3_scRNA pipeline metaprogram2](https://user-images.githubusercontent.com/33009124/180665564-ca11de44-a53c-441f-ae3f-fc8e5baadb68.PNG)
 
 
 ### Module4
