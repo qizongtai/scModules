@@ -38,7 +38,6 @@ You can install the development version of scModules from
 if (!require(devtools)) {
   install.packages("devtools")
 }
-# install.packages("devtools")
 
 devtools::install_github("qizongtai/scModules", ref = "development")
 library(scModules)
