@@ -56,7 +56,7 @@ library(scModules)
 ### Module1
 
 ![1_scRNA_celltype_workflow](https://user-images.githubusercontent.com/33009124/177924123-b77d89d4-fc91-4673-8ca3-1823942e7d36.PNG)
-infercna aims to provide functions for inferring CNA values from scRNA-seq data and related queries. 
+Module1 provides functions to prosess scRNA-seq data from raw cellranger output and assign cell types for each cell.
 
 #### Compuatation functions (refer to R script for a full list)
 -   `read_mtx()` imports the Sparse Matrix outputs from Cellranger and convert it into a regular Matrix. 
@@ -88,21 +88,21 @@ infercna aims to provide functions for inferring CNA values from scRNA-seq data 
 ![2_scRNA pipeline
 infercna](https://user-images.githubusercontent.com/33009124/177924157-cda90bf3-4953-4c3f-9ab5-7ba03c6222c9.PNG)
 
-infercna aims to provide functions for inferring CNA values from scRNA-seq data and related queries. 
+Module2 provides functions for inferring CNA values and identify epithelial malignant cells. 
 
 #### compuatation
--   `infercna()` to infer copy-number alterations from single-cell RNA-seq data
--   `refCorrect()` to convert relative CNA values to absolute values + computed in `infercna()` if reference cells are provided
--   `cnaCor()` a parameter to identify cells with high CNAs + computed in `cnaScatterPlot()`
--   `cnaSignal()` a second parameter to identify cells with high CNAs + computed in `cnaScatterPlot()`
--   `findMalignant()` to find malignant subsets of cells
--   `findClones()` to identify genetic subclones
--   `fitBimodal()` to fit a bimodal gaussian distribution + used in `findMalignant()` + used in `findClones()`
--   `filterGenes()` to filter genes by their genome features
--   `splitGenes()` to split genes by their genome features
--   `orderGenes()` to order genes by their genomic position
--   `useGenome()` to change the default genome configured with infercna
--   `addGenome()` to configure infercna with a new genome specified by the user
+-   `infercna()` infers copy-number alterations from single-cell RNA-seq data
+-   `refCorrect()` converts relative CNA values to absolute values + computed in `infercna()` if reference cells are provided
+-   `cnaCor()` calcualte a parameter to identify cells with high CNAs + computed in `cnaScatterPlot()`
+-   `cnaSignal()` calcualte a second parameter to identify cells with high CNAs + computed in `cnaScatterPlot()`
+-   `findMalignant()` finds malignant subsets of cells
+-   `findClones()` identifies genetic subclones
+-   `fitBimodal()` fits a bimodal gaussian distribution + used in `findMalignant()` + used in `findClones()`
+-   `filterGenes()` filters genes by their genome features
+-   `splitGenes()` splits genes by their genome features
+-   `orderGenes()` orders genes by their genomic position
+-   `useGenome()` changes the default genome configured with infercna
+-   `addGenome()` configures infercna with a new genome specified by the user
 
 #### visualization
 -   `cnaPlot()` to plot a heatmap of CNA values
