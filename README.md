@@ -108,9 +108,8 @@ alterations from single-cell RNA-seq data
     the user
 
 ### Module3
+![3_scRNA pipeline metaprogram](https://user-images.githubusercontent.com/33009124/180665518-828756b2-df70-4bee-a587-70987cc2cf6c.PNG)
 
-Functions are ready and need to be intergared into the R package. **to
-be continued**
 
 ### Module4
 
