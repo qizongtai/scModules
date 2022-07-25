@@ -75,7 +75,7 @@ library(scModules)
 -   `filter2_gene()` filters genes in the gene-cell matrix by user-specified settings. Note, it returns a gene-filtered mtx.cpm. 
 ##### Advanced QC
 -   `detect_db()` detects doublets using four well-developed method: three methods (scdDblFinder, hybrid score from scds, doubletCells algorithm from scran) are based on single cell experiment objects and one method (DoubleFinder) is based on Seurat object. Doublets were identified by combining the results of these alternative methods. For each method, we set the expected doublet rate at 0.6%, per 500 cells per sample. Cells classified as doublets by all three single cell expereiemnt based methods or all four methods. (Micheal: at least two methods if the three).
-##### Signature Score
+##### Signature score
 -   `geneset_score()` calculates the signature score for the given geneset. For each cell, a relative expression score was defined by subtracting the average expression of the gene signature in a cell by that of a control gene set. The control gene set was defined by dividing all analyzed genes into 30 bins by average expression level, and for each gene in the gene signature randomly sampling 100 genes from the same bin. highest cell signature score less than (1 + conf_int)* the second highest signature.
 -   `type_score()` assigns cell type to individual cells by the highest signature score of a cell type. Cell will be classified as unresolved if highest cell signature score less than (1 + conf_int)* the second highest signature.
 ##### Dimension reduction
