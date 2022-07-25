@@ -121,8 +121,19 @@ library(scModules)
 #### Module3 provides functions for NMF decomposition and identification of metaprograms across multiple samples or patients.
 ![3_scRNA pipeline metaprogram smallsize](https://user-images.githubusercontent.com/33009124/180667067-7097aff1-3782-4642-90a0-8439492c6572.PNG)
 
+#### Compuatation functions (refer to R script for a full list)
+##### NMF on single sample/patient
+-   `meta_nmf()` performs NMF on gene x cell matrix and output gene.cluster.df, named(cell barcode) vector(cluster) and heatmap(gene x cell)
+-   `jac_mat()` calculates Jaccard index for each pairwise cluster comparison
+-   `jac_heatmap()` transforms jaccard values(df) to jaccard correlation heatmap(mtx)
     
-Functions are ready and need to be intergared into the R package. **to be continued**
+##### Extract metaprograms
+-   `extract_metaprogs()` extracts metaprograms from clustering of individual programs
+    
+#### Visualization functions (refer to R script for a full list)
+-   `meta_plot()` plots gene programs during collection of metaprograms
+
+More functions will be intergared into the R package. **to be continued**
 
 ### Module4
 #### Module4 provides functions for TCR estimates (clonality + TCR richness + Gini index) and enrichment analysis.
