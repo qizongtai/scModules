@@ -133,13 +133,13 @@ library(scModules)
 #### Visualization functions (refer to R script for a full list)
 -   `meta_plot()` plots gene programs during collection of metaprograms
 
-More functions will be intergared into the R package. **to be continued**
+More functions will be intergared. **to be continued**
 
 ### Module4
 #### Module4 provides functions for TCR estimates (clonality + TCR richness + Gini index) and enrichment analysis.
 ![4_scRNA pipeline TCR smallsize](https://user-images.githubusercontent.com/33009124/180667079-f04ac2ca-90fd-43a0-803a-1b58e7f0c1de.PNG)
 
-Functions are ready and need to be intergared into the R package. **to be continued**
+Functions are ready and need to be intergared. **to be continued**
 
 ------------------------------------------------------------------------
 
