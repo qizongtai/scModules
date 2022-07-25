@@ -96,13 +96,17 @@ library(scModules)
 ![2_scRNA pipeline infercna](https://user-images.githubusercontent.com/33009124/177924157-cda90bf3-4953-4c3f-9ab5-7ba03c6222c9.PNG)
 
 #### Compuatation functions (refer to R script for a full list)
+##### CNA values
 -   `infercna()` infers copy-number alterations from single-cell RNA-seq data
 -   `refCorrect()` converts relative CNA values to absolute values + computed in `infercna()` if reference cells are provided
+##### CNA parameters
 -   `cnaCor()` calcualte a parameter to identify cells with high CNAs + computed in `cnaScatterPlot()`
 -   `cnaSignal()` calcualte a second parameter to identify cells with high CNAs + computed in `cnaScatterPlot()`
+##### Malignant and subclones
 -   `findMalignant()` finds malignant subsets of cells
 -   `findClones()` identifies genetic subclones
 -   `fitBimodal()` fits a bimodal gaussian distribution + used in `findMalignant()` + used in `findClones()`
+##### Utils
 -   `filterGenes()` filters genes by their genome features
 -   `splitGenes()` splits genes by their genome features
 -   `orderGenes()` orders genes by their genomic position
@@ -117,6 +121,7 @@ library(scModules)
 #### Module3 provides functions for NMF decomposition and identification of metaprograms across multiple samples or patients.
 ![3_scRNA pipeline metaprogram smallsize](https://user-images.githubusercontent.com/33009124/180667067-7097aff1-3782-4642-90a0-8439492c6572.PNG)
 
+    
 Functions are ready and need to be intergared into the R package. **to be continued**
 
 ### Module4
