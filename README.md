@@ -51,7 +51,7 @@ library(scModules)
 
 -   `Module3: cell state (metaprogram) annotation by NMF`
 
--   `Module4: Immune (TCR/BCR) repertoire analysis`
+-   `Module4: TCR clonotype analysis`
 
 ### Module1
 
