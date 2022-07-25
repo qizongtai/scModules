@@ -59,13 +59,16 @@ library(scModules)
 ![1_scRNA_celltype_workflow](https://user-images.githubusercontent.com/33009124/177924123-b77d89d4-fc91-4673-8ca3-1823942e7d36.PNG)
 
 #### Compuatation functions (refer to R script for a full list)
+##### Data structure
 -   `read_mtx()` imports the Sparse Matrix outputs from Cellranger and convert it into a regular Matrix. 
 -   `create_metadata()` creates a matrix to store the meta data (features) for the cells. 
 -   `add_metadata()` adds new metadata to the existing metadata. It also checks the cell IDs when merging; If cell IDs doesn’t match between original and added metadata, users will have an option to proceed or stop the `add_metadata()` function.
--   `geneset_percent()` calculates the percentage of counts originating from a set of features.
 -   `check_mtx_meta()` checks if cell IDs in gene-cell matrix and metadata are matched in order. It returns a logical value.
+-   `match_mtx_meta()` check if cell IDs in gene-cell matrix and metadata are matched in order. It also checks the cell IDs when merging; If cell IDs doesn’t match between original and added metadata, users will have an option to proceed or stop the match_mtx_meta function. It returns a matched gene-cell matrix.
+##### Regular QC
+-   `geneset_percent()` calculates the percentage of counts originating from a set of features.
 -   `filter_cell_bymeta()` filter cells in the gene-cell matrix by the feature settings from metadata. It returns both the filtered gene-cell matrix and metadata. It checks cells IDs before filtering and requires same number of cells.
--   `match_mtx_meta()` check if cell IDs in gene-cell matrix and metadata are matched in order. It also checks the cell IDs when merging; If cell IDs doesn’t match between original and added metadata, users will have an option to proceed or stop the match_mtx_meta function. It returns a matched gene-cell matrix. 
+ 
 -   `filter1_cell()` filters cells in the gene-cell matrix by user-specified settings. It returns a cell-filtered mtx.count. 
 -   `filter2_gene()` filters genes in the gene-cell matrix by user-specified settings. Note, it returns a gene-filtered mtx.cpm. 
 -   `detect_db()` detects doublets using four well-developed method: three methods (scdDblFinder, hybrid score from scds, doubletCells algorithm from scran) are based on single cell experiment objects and one method (DoubleFinder) is based on Seurat object. Doublets were identified by combining the results of these alternative methods. For each method, we set the expected doublet rate at 0.6%, per 500 cells per sample. Cells classified as doublets by all three single cell expereiemnt based methods or all four methods. (Micheal: at least two methods if the three) 
