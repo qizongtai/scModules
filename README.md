@@ -55,7 +55,7 @@ library(scModules)
 
 ### Module1
 
-Module1 provides functions to prosess scRNA-seq data from raw cellranger output and assign cell types for each cell.
+Module1 provides functions to process scRNA-seq data from Cellranger outputs and assign cell types for each cell.
 ![1_scRNA_celltype_workflow](https://user-images.githubusercontent.com/33009124/177924123-b77d89d4-fc91-4673-8ca3-1823942e7d36.PNG)
 
 #### Compuatation functions (refer to R script for a full list)
