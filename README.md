@@ -58,7 +58,7 @@ library(scModules)
 #### Module1 provides functions to pre-process scRNA-seq data from Cellranger outputs and assign cell types for each cell.
 ![1_scRNA_celltype_workflow](https://user-images.githubusercontent.com/33009124/177924123-b77d89d4-fc91-4673-8ca3-1823942e7d36.PNG)
 
-#### Compuatation functions (refer to R script for a full list)
+#### Compuatation functions (refer to R scripts for a full list)
 ##### Data structure
 -   `read_mtx()` imports the Sparse Matrix outputs from Cellranger and convert it into a regular Matrix. 
 -   `create_metadata()` creates a matrix to store the meta data (features) for the cells. 
