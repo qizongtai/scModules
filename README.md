@@ -97,7 +97,7 @@ library(scModules)
 #### Module2 provides functions for inferring CNA values and identify epithelial malignant cells. 
 ![2_scRNA pipeline infercna](https://user-images.githubusercontent.com/33009124/177924157-cda90bf3-4953-4c3f-9ab5-7ba03c6222c9.PNG)
 
-#### Compuatation functions (refer to scModules/dev/source_code/ for a full list
+#### Compuatation functions (refer to scModules/dev/source_code/ for a full list)
 ##### CNA values
 -   `infercna()` infers copy-number alterations from single-cell RNA-seq data
 -   `refCorrect()` converts relative CNA values to absolute values + computed in `infercna()` if reference cells are provided
@@ -115,7 +115,7 @@ library(scModules)
 -   `useGenome()` changes the default genome configured with infercna
 -   `addGenome()` configures infercna with a new genome specified by the user
 
-#### Visualization functions (refer to scModules/dev/source_code/ for a full list
+#### Visualization functions (refer to scModules/dev/source_code/ for a full list)
 -   `cnaPlot()` to plot a heatmap of CNA values
 -   `cnaScatterPlot()` to visualise malignant and non-malignant cell subsets
 
@@ -123,7 +123,7 @@ library(scModules)
 #### Module3 provides functions for NMF decomposition and identification of metaprograms across multiple samples or patients.
 ![3_scRNA pipeline metaprogram smallsize](https://user-images.githubusercontent.com/33009124/180667067-7097aff1-3782-4642-90a0-8439492c6572.PNG)
 
-#### Compuatation functions (refer to scModules/dev/source_code/ for a full list
+#### Compuatation functions (refer to scModules/dev/source_code/ for a full list)
 ##### NMF on single sample/patient
 -   `meta_nmf()` performs NMF on gene x cell matrix and output gene.cluster.df, named(cell barcode) vector(cluster) and heatmap(gene x cell)
 -   `jac_mat()` calculates Jaccard index for each pairwise cluster comparison
@@ -132,7 +132,7 @@ library(scModules)
 ##### Extract metaprograms
 -   `extract_metaprogs()` extracts metaprograms from clustering of individual programs
     
-#### Visualization functions (refer to scModules/dev/source_code/ for a full list
+#### Visualization functions (refer to scModules/dev/source_code/ for a full list)
 -   `meta_plot()` plots gene programs during collection of metaprograms
 
 More functions will be intergared. **to be continued**
