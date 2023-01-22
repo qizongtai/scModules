@@ -150,4 +150,3 @@ Functions are ready and need to be intergared. **to be continued**
     for scRNA-seq analysis and visualization.
 -   August 08, 2022 Version 0.1.1: Functions from Module2 and 3 are integrated.
 -   **to be continued**
-
