@@ -91,6 +91,8 @@ library(scModules)
 -   `geneset_score()` calculates the signature score for the given geneset. For each cell, a relative expression score was defined by subtracting the average expression of the gene signature in a cell by that of a control gene set. The control gene set was defined by dividing all analyzed genes into 30 bins by average expression level, and for each gene in the gene signature randomly sampling 100 genes from the same bin. highest cell signature score less than (1 + conf_int)* the second highest signature.
 -   `type_score()` assigns cell type to individual cells by the highest signature score of a cell type. Cell will be classified as unresolved if highest cell signature score less than (1 + conf_int)* the second highest signature.
 
+![1_celltype assignment_decision_tree_3](https://user-images.githubusercontent.com/33009124/214645700-12677dc2-305e-46f5-add8-fae3b4a51965.PNG)
+
 ### Module2
 
 #### Module2 provides functions for inferring CNA values and identify epithelial malignant cells. 
