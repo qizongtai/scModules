@@ -91,7 +91,7 @@ library(scModules)
 -   `geneset_score()` calculates the signature score for the given geneset. For each cell, a relative expression score was defined by subtracting the average expression of the gene signature in a cell by that of a control gene set. The control gene set was defined by dividing all analyzed genes into 30 bins by average expression level, and for each gene in the gene signature randomly sampling 100 genes from the same bin. highest cell signature score less than (1 + conf_int)* the second highest signature.
 -   `type_score()` assigns cell type to individual cells by the highest signature score of a cell type. Cell will be classified as unresolved if highest cell signature score less than (1 + conf_int)* the second highest signature.
 
-![celltype_assignment](https://user-images.githubusercontent.com/33009124/214646585-849dc2df-2d05-44ef-9fe0-0238d0c72448.PNG)
+![Capture2](https://user-images.githubusercontent.com/33009124/214647175-6385f31b-93dd-48be-8d9f-53048db9ce73.PNG)
 
 
 ### Module2
